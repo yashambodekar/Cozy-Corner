@@ -1,25 +1,18 @@
-import React from 'react';
-import '../styles/navbar.css';
+import { Link } from "react-router-dom";
+import "../styles/navbar.css";
 
 const Navbar = () => {
-  const scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <header className="navbar">
-      <div className="navbar-logo">☕ Cozy Corner</div>
-      <nav className="navbar-links">
-        <button onClick={() => scrollToSection('home')}>Home</button>
-        <button onClick={() => scrollToSection('menu')}>Menu</button>
-        <button onClick={() => scrollToSection('gallery')}>Gallery</button>
-        <button onClick={() => scrollToSection('team')}>Our Team</button>
-        <button onClick={() => scrollToSection('contact')}>Contact</button>
-      </nav>
-    </header>
+    <nav className="navbar">
+      <div className="logo">Cozy Corner</div>
+      <ul className="nav-links">
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/menu">Menu</Link></li>
+        <li><Link to="/gallery">Gallery</Link></li>
+        <li><Link to="/team">Our Team</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
+      </ul>
+    </nav>
   );
 };
 
