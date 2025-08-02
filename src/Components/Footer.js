@@ -19,7 +19,7 @@ const Footer = () => {
     },
   ]
 
-  const quickLinks = ["Menu", "Our Story", "Gallery", "Contact", "Catering"]
+  const quickLinks = ["Menu", "Gallery",]
 
   return (
     <footer className="footer">
@@ -62,13 +62,13 @@ const Footer = () => {
             <h3 className="section-title">Visit Us</h3>
             <div className="contact-info">
               <p>
-                123 Cozy Street
+                11, East St
                 <br />
-                Downtown District
+                Camp, Pune
                 <br />
-                City, State 12345
+                Maharashtra 411001
               </p>
-              <p>(555) 123-COZY</p>
+              <p>+91 85423 95741</p>
               <p>hello@cozy-corner.com</p>
             </div>
           </div>

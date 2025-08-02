@@ -6,8 +6,6 @@ import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
 import Menu from "./Components/Menu";
 import Gallery from "./Components/Gallery";
-import Team from "./Components/Team";
-import Contact from "./Components/Contact";
 import Footer from "./Components/Footer";
 import ScrollToTop from "./Components/ScrollToTop";
 
@@ -34,8 +32,6 @@ const App = () => {
         <Route path="/" element={<HomeWithNavigation />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </Router>
