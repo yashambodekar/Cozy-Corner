@@ -6,11 +6,11 @@ import "../styles/menu.css"
 import coffeeCup from "../assets/coffee-cup.jpg"
 import croissant from "../assets/crossiant.jpg"
 import signatureSandwich from "../assets/signature-sandwich.jpg"
-import gallery1 from "../assets/gallery-1.jpg"
-import gallery2 from "../assets/gallery-2.jpg"
-import gallery3 from "../assets/gallery-3.jpg"
-import gallery4 from "../assets/gallery-4.jpg"
-import gallery5 from "../assets/gallery-5.jpg"
+import gallery1 from "../assets/capsupreme.png"
+import gallery2 from "../assets/avacado.png"
+import gallery3 from "../assets/chicken.png"
+import gallery4 from "../assets/berry.png"
+import gallery5 from "../assets/salad.png"
 
 export default function MenuPage() {
   const [selectedDish, setSelectedDish] = useState(null)

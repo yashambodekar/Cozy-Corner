@@ -234,11 +234,11 @@ body {
   border-radius: 3px;
 }
 
-.bean-1 { top: 20%; left: 10%; animation-delay: 0s; }
-.bean-2 { top: 30%; right: 15%; animation-delay: 1s; }
-.bean-3 { bottom: 25%; left: 20%; animation-delay: 2s; }
-.bean-4 { bottom: 35%; right: 25%; animation-delay: 3s; }
-.bean-5 { top: 60%; left: 50%; animation-delay: 4s; }
+.bean-1 { top: 50%; left: 25%; animation-delay: 2s; }
+.bean-2 { top: 50%; right: 25%; animation-delay: 2s; }
+.bean-3 { bottom: 20%; left: 20%; animation-delay: 2s; }
+.bean-4 { bottom: 20%; right: 25%; animation-delay: 2s; }
+.bean-5 { bottom: 20%; left: 50%; animation-delay: 2s; }
 
 /* Welcome Screen */
 .welcome-screen {

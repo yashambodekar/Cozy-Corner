@@ -79,13 +79,13 @@ export default function CozyCornerLoader() {
               <div className="progress-text">{progress}%</div>
             </div>
 
-            <div className="coffee-beans">
+            {/* <div className="coffee-beans">
               <div className="bean bean-1"></div>
               <div className="bean bean-2"></div>
               <div className="bean bean-3"></div>
               <div className="bean bean-4"></div>
               <div className="bean bean-5"></div>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
