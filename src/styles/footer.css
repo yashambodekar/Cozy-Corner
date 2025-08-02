@@ -1,12 +1,172 @@
+body {
+  margin: 0;
+}
 .footer {
-  background-color: #2c1a0d;
-  color: #fff;
-  text-align: center;
-  padding: 30px 20px;
-  font-size: 0.95rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #4b3b2a; /* Dark brown */
+  color: #fdfaf6; /* Light cream text */
+  padding: 4rem 0;
 }
 
-.footer p {
-  margin: 5px 0;
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+/* Brand Section */
+.brand-section {
+  grid-column: span 1;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #fdfaf6; /* Light cream for logo */
+}
+
+.brand-text {
+  font-size: 1.5rem;
+  font-family: 'Cozy Corner', sans-serif;
+  font-weight: 600;
+}
+
+.brand-description {
+  font-family: serif;
+  color: rgba(253, 250, 246, 0.85); /* Slightly faded cream */
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 28rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgba(253, 250, 246, 0.1); /* Faint cream background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  color: #fdfaf6; /* Icon color */
+}
+
+.social-link:hover {
+  background-color: #a15c0e; /* Warm accent brown */
+}
+
+.social-link:hover .social-icon {
+  color: #fdfaf6;
+}
+
+/* Links Section */
+.section-title {
+  font-size: 1.125rem;
+  font-family: sans-serif;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #fdfaf6;
+}
+
+.links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: serif;
+}
+
+.footer-link {
+  color: rgba(253, 250, 246, 0.85);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #a15c0e; /* Accent on hover */
+}
+
+/* Contact Section */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-family: serif;
+  color: rgba(253, 250, 246, 0.85);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(253, 250, 246, 0.2);
+}
+
+.bottom-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .bottom-content {
+    flex-direction: row;
+    gap: 0;
+  }
+}
+
+.copyright {
+  font-family: serif;
+  color: rgba(253, 250, 246, 0.7);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.made-with-love {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: rgba(253, 250, 246, 0.7);
+  font-family: serif;
+  font-size: 0.875rem;
+}
+
+.coffee-icon {
+  height: 2rem;
+  width: 2rem;
+  color: #fdfaf6;
+}
+
+.social-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.heart-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #a15c0e;
 }
