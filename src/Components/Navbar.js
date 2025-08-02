@@ -4,7 +4,7 @@ import "../styles/navbar.css";
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <div style={{ padding: "20px" }}>
+      <div className="navbar-logo">
         <CozyCornerLogo />
       </div>
       <ul className="nav-links">
@@ -15,13 +15,12 @@ const Navbar = () => {
         <li><Link to="/contact">Contact</Link></li>
       </ul>
     </nav>
-    
   );
 };
 
 const CozyCornerLogo = () => {
   return (
-    <div className="logo-container">
+    <div className="navbar-static-logo">
       <svg
         className="coffee-icon"
         viewBox="0 0 24 24"
@@ -39,10 +38,9 @@ const CozyCornerLogo = () => {
       </svg>
       <span className="logo-text">The Cozy Corner</span>
     </div>
-  )
-}
+  );
+};
 
-export {CozyCornerLogo};
-
-
+export { CozyCornerLogo };
 export default Navbar;
+ 

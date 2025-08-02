@@ -1,75 +1,70 @@
 /* --- Main Navbar Container --- */
 .navbar {
-  /* Layout and Positioning */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed; /* Keeps navbar at the top */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* Spans the full width */
-  padding: 0 40px; /* Side padding */
-  height: 75px; /* Adjusted height */
+  width: 100%;
+  padding: 0 40px;
+  height: 75px;
   z-index: 1000;
-
-  /* Styling */
-  background-color: #fcfbf9; /* Very light, off-white background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle bottom shadow */
+  background-color: #fcfbf9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-sizing: border-box; /* Ensures padding is included in the width */
+  box-sizing: border-box;
 }
 
-/* --- Logo Styling --- */
-/* This targets a link (<a>) you should wrap your logo in */
-.logo-container {
+/* --- Navbar Logo --- */
+.navbar-logo {
   display: flex;
   align-items: center;
-  gap: 8px; /* equivalent to space-x-2 */
+  height: 100%;
 }
 
-/* Navbar logo */
-.navbar .coffee-icon {
-  stroke: #4b3b2a; /* Dark brown for navbar */
+/* Static Logo (No Animation) */
+.navbar-static-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: none !important;
+  transform: none !important;
 }
 
-/* Footer logo */
-.footer .coffee-icon {
-  stroke: #fdfaf6; /* Cream/white for footer */
+.navbar-static-logo svg,
+.navbar-static-logo .logo-text {
+  animation: none !important;
+  transform: none !important;
 }
 
+/* Coffee Icon */
 .coffee-icon {
-  height: 32px; /* equivalent to h-8 */
-  width: 32px; /* equivalent to w-8 */
-  color: #592e13; /* primary blue color */
+  height: 32px;
+  width: 32px;
+  color: #592e13;
+  stroke: #4b3b2a;
 }
 
+/* Logo Text */
 .logo-text {
-  font-size: 24px; /* equivalent to text-2xl */
-  font-family: sans-serif; /* equivalent to font-sans */
-  font-weight: 600; /* equivalent to font-semibold */
-  color: #592e13; /* primary blue color */
+  font-size: 24px;
+  font-family: sans-serif;
+  font-weight: 600;
+  color: #592e13;
 }
 
-/* --- Wrapper for Navigation Links & CTA Button --- */
-/* A new wrapper to group items on the right */
-.nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 25px; /* Space between links list and the CTA button */
-}
-
-/* --- List of Navigation Links (ul) --- */
+/* --- Navigation Links --- */
 .nav-links {
   display: flex;
-  list-style: none; /* Removes bullet points */
+  list-style: none;
   margin: 0;
   padding: 0;
-  gap: 35px; /* Space between each link */
+  gap: 35px;
 }
 
-/* --- Individual Navigation Links (a) --- */
 .nav-links a {
-  color: #5c5c5c; /* Muted dark gray for links */
+  color: #5c5c5c;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
@@ -77,22 +72,5 @@
 }
 
 .nav-links a:hover {
-  color: #000; /* Darkens text on hover */
-}
-
-/* --- "Reserve Table" CTA Button --- */
-.cta-button {
-  background-color: #dbe0c8; /* Light olive/beige background */
-  color: #3e3e3e; /* Dark text color */
-  padding: 10px 22px;
-  border-radius: 50px; /* Creates the pill shape */
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-  white-space: nowrap; /* Prevents text from wrapping */
-}
-
-.cta-button:hover {
-  background-color: #c9ceb7; /* Slightly darker on hover */
+  color: #000;
 }
