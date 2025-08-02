@@ -1,157 +1,321 @@
-/* styles/home.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap');
 
-/* --- Hero Section with 3D Canvas --- */
-.hero-section {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fffaf3;
+  color: #333;
+  scroll-behavior: smooth;
 }
 
-#canvas-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+/* Hero Section */
+.hero-section {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(40, 20, 10, 0.55);
+  z-index: 1;
+}
+
+.hero-content {
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+  animation: fadeInUp 1.5s ease-in-out;
+  transition: all 0.3s ease;
+  padding: 0 20px;
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif;
-    color: #6F4E37; /* --coffee-brown */
-    font-size: 8vw; /* Initial size for scroll animation */
-    text-align: center;
-    z-index: 10;
-    transition: font-size 0.2s linear, font-weight 0.2s linear;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 7vw, 5.5rem); 
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: capitalize;
+  background: linear-gradient(90deg, #ffddaa, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  margin-bottom: 30px; 
 }
 
-/* --- General Content Section Styling --- */
-.content-section {
-    padding: 6rem 5%;
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
+
+.hero-subtitle {
+  font-size: clamp(1.3rem, 2.8vw, 1.8rem); 
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.6px;
+  max-width: 750px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
 }
 
-.content-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 1rem;
-    color: #6F4E37; /* --coffee-brown */
+
+/* Best Sellers Section */
+.best-sellers-home {
+  padding: 100px 5%;
+  background: linear-gradient(180deg, #fffaf3, #fef7e6);
 }
 
-.content-section p {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    max-width: 600px;
-    margin: 0 auto 2rem auto;
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 4rem); 
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px; 
+  background: linear-gradient(90deg, #6b4226, #d2691e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
 }
 
-/* --- Bestseller Section with Sliding Image --- */
-.bestseller {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    text-align: left;
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, #d2691e, #ffa500);
+  border-radius: 2px;
 }
 
-.bestseller .text-content,
-.bestseller .image-content {
-    flex: 1;
-    width: 100%;
+.section-subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #8b6f55;
+  max-width: 700px;
+  margin: 0 auto 60px;
+  line-height: 1.6;
 }
 
-.bestseller .image-content img {
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    /* Initial state for scroll animation */
-    opacity: 0;
-    transform: translateX(100px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+.best-sellers-home .section-title,
+.memories-section .section-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem); 
+  margin-bottom: 40px;
 }
 
-/* State when element is visible on screen */
-.bestseller.is-visible .image-content img {
-    opacity: 1;
+
+
+.best-sellers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.best-seller-item {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  opacity: 0;
+  transform: translateY(80px);
+  transition: all 1s ease;
+}
+
+.best-seller-item.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.best-seller-item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.item-image-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.item-image {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+  border-radius: 20px;
+}
+
+.item-image-container:hover .item-image {
+  transform: scale(1.08);
+}
+
+.item-details {
+  flex: 1;
+  padding: 20px;
+}
+
+.item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: #6b4226;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.item-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #5a4a3b;
+}
+
+.item-price {
+  font-size: 1.5rem;
+  color: #d2691e;
+  font-weight: bold;
+}
+
+/* Explore Button */
+.explore-button {
+  display: block;
+  margin: 40px auto 0;
+  padding: 16px 50px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, #6b4226, #d2691e);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.explore-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(107, 66, 38, 0.4);
+}
+
+/* Button Ripple */
+.button-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s, opacity 1s;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.explore-button:active .button-ripple {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  transition: 0s;
+}
+
+/* Memories Section with Marquee */
+.memories-section {
+  padding: 100px 5%;
+  background: #fffaf3;
+  overflow: hidden;
+}
+
+.marquee-container {
+  overflow: hidden;
+  margin: 60px 0;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 30px;
+  animation: marqueeScroll 25s linear infinite;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  flex-shrink: 0;
+  width: 300px;
+  height: 200px;
+  border-radius: 15px;
+  overflow: hidden;
+  transform: scale(1);
+  transition: transform 0.4s ease;
+}
+
+.marquee-item:hover {
+  transform: scale(1.08);
+}
+
+.marquee-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+/* Animations */
+@keyframes marqueeScroll {
+  0% {
     transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-/* --- Image Gallery with Hover Effect --- */
-.image-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.image-gallery img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-    border-radius: 12px;
-    filter: grayscale(100%);
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    cursor: pointer;
-}
-
-.image-gallery img:hover {
-    filter: grayscale(0%);
-    transform: scale(1.05) translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-
-/* --- CTA Section and Ripple Button --- */
-.cta-section {
-    background-color: rgba(0,0,0,0.03);
-    border-radius: 12px;
-    margin: 0 5%;
-}
-
-.cta-button {
-    background-color: #E07A5F; /* --terracotta */
-    color: #F5F5DC; /* --cream */
-    border: none;
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    position: relative; /* Required for ripple effect */
-    overflow: hidden; /* Required for ripple effect */
-}
-
-.cta-button:hover {
-    background-color: #d8684a;
-    transform: translateY(-3px);
-}
-
-.ripple {
-    position: absolute;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.7);
-    transform: scale(0);
-    animation: ripple-effect 0.6s linear;
-}
-
-@keyframes ripple-effect {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-
-/* --- Media Queries for Responsiveness --- */
-@media (min-width: 768px) {
-    .bestseller {
-        flex-direction: row;
-    }
-    .hero-title {
-        font-size: 6vw;
-    }
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }

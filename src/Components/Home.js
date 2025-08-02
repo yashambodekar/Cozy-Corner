@@ -1,251 +1,196 @@
-// import React from 'react';
-// import '../styles/home.css';
-// import coffeeCup from '../assets/3_7.jpg'; // Make sure to add an image in assets
+import { useEffect, useRef, useState } from "react"
+import "../styles/home.css"
 
-// const Home = () => {
-//   return (
-//     <section className="home" id="home">
-//       <div className="logo-container">
-//         <div className="ripple">
-//           <img src={coffeeCup} alt="Coffee Cup" className="coffee-cup" />
-//         </div>
-//         <h1 className="shop-name">Welcome to Cozy Corner</h1>
-//       </div>
-//     </section>
-//   );
-// };
+import Expresso from "../assets/Expresso.jpeg"
+import Breakfast from "../assets/Breakfast.jpeg"
+import Sandwich from "../assets/sandwich.jpg"
+import Cafe from "../assets/cafe.jpg"
 
-// export default Home;
+import Gallery1 from "../assets/gallery-1.jpg"
+import Gallery2 from "../assets/gallery-2.jpg"
+import Gallery3 from "../assets/gallery-3.jpg"
+import Gallery4 from "../assets/gallery-4.jpg"
+import Gallery5 from "../assets/gallery-5.jpg"
+import Gallery6 from "../assets/gallery-6.jpg"
+import Gallery7 from "../assets/gallery-7.jpg"
+import Gallery8 from "../assets/gallery-8.jpg"
 
+export default function HomePage({ navigateTo }) {
+  const [scrollY, setScrollY] = useState(0)
+  const bestSellersRef = useRef(null)
+  const [animatedItems, setAnimatedItems] = useState(new Set())
+  const heroBgRef = useRef(null)
+  const cupRef = useRef(null)
 
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import '../styles/home.css'; // Assuming styles are in a subfolder
+  useEffect(() => {
+    const handleScroll = () => {
+      const newScrollY = window.scrollY
+      setScrollY(newScrollY)
 
-// Component for the Ripple Button to keep the logic clean
-const RippleButton = ({ children, className }) => {
-    const buttonRef = useRef(null);
+      // Parallax effect on hero background
+      if (heroBgRef.current) {
+        heroBgRef.current.style.transform = `scale(${1.1 + newScrollY * 0.0005}) translateY(${newScrollY * 0.1}px)`
+      }
 
-    useEffect(() => {
-        const button = buttonRef.current;
-        if (!button) return;
+      // Slight parallax for the cup
+      if (cupRef.current) {
+        cupRef.current.style.transform = `translateY(${newScrollY * -0.05}px)`
+      }
+    }
 
-        const clickHandler = (e) => {
-            const rect = button.getBoundingClientRect();
-            const circle = document.createElement('span');
-            const diameter = Math.max(button.clientWidth, button.clientHeight);
-            const radius = diameter / 2;
+    // Debounce scroll listener for performance
+    let ticking = false
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
 
-            circle.style.width = circle.style.height = `${diameter}px`;
-            circle.style.left = `${e.clientX - rect.left - radius}px`;
-            circle.style.top = `${e.clientY - rect.top - radius}px`;
-            circle.classList.add('ripple');
+    window.addEventListener("scroll", onScroll)
 
-            const existingRipple = button.querySelector('.ripple');
-            if (existingRipple) {
-                existingRipple.remove();
-            }
+    // Animate sections on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number.parseInt(entry.target.getAttribute("data-index") || "0")
+            setAnimatedItems((prev) => new Set([...prev, index]))
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
 
-            button.appendChild(circle);
-        };
+    const bestSellerItems = document.querySelectorAll(".best-seller-item")
+    bestSellerItems.forEach((item) => observer.observe(item))
 
-        button.addEventListener('click', clickHandler);
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      observer.disconnect()
+    }
+  }, [])
 
-        return () => {
-            button.removeEventListener('click', clickHandler);
-        };
-    }, []);
+  const bestSellers = [
+    {
+      id: 1,
+      name: "Signature Espresso Blend",
+      description: "Our house special blend with rich chocolate notes and a smooth finish.",
+      price: "$4.50",
+      image: Expresso,
+    },
+    {
+      id: 2,
+      name: "Cozy Corner Breakfast",
+      description: "Fluffy pancakes with fresh berries, maple syrup, and crispy bacon.",
+      price: "$12.99",
+      image: Breakfast,
+    },
+    {
+      id: 3,
+      name: "Artisan Croissant Sandwich",
+      description: "Buttery croissant filled with smoked salmon and cream cheese.",
+      price: "$9.75",
+      image: Sandwich,
+    },
+  ]
 
-    return (
-        <button ref={buttonRef} className={className}>
-            {children}
-        </button>
-    );
-};
+  const memoryImages = [Gallery1, Gallery2, Gallery3, Gallery4, Gallery5, Gallery6, Gallery7, Gallery8]
 
+  return (
+    <div className="home-page">
+      {/* Hero Section */}
+      <section className="hero-section">
+        <div className="hero-background" ref={heroBgRef}>
+          <img src={Cafe} alt="Coffee Shop" className="hero-bg-image" />
+          <div className="hero-overlay"></div>
+        </div>
 
-// Main Home Component
-const Home = () => {
-    const canvasContainerRef = useRef(null);
-    const scrollTextRef = useRef(null);
-    const bestsellerRef = useRef(null);
+        <div className="revolving-cup-container" ref={cupRef}>
+          <div className="revolving-cup">
+            <div className="cup-3d">
+              <div className="cup-front"></div>
+              <div className="cup-back"></div>
+              <div className="cup-left"></div>
+              <div className="cup-right"></div>
+              <div className="cup-top"></div>
+              <div className="cup-bottom"></div>
+              <div className="handle-3d"></div>
+            </div>
+            <div className="steam-particles">
+              <div className="particle particle-1"></div>
+              <div className="particle particle-2"></div>
+              <div className="particle particle-3"></div>
+              <div className="particle particle-4"></div>
+              <div className="particle particle-5"></div>
+            </div>
+          </div>
+        </div>
 
-    // --- EFFECT FOR 3D SCENE ---
-    useEffect(() => {
-        const container = canvasContainerRef.current;
-        if (!container || container.childElementCount > 0) return; // Ensure it only runs once
+        <div className="hero-content">
+          <h1
+            className="hero-title"
+            style={{ fontSize: `${Math.min(5, 3 + scrollY * 0.01)}rem` }}
+          >
+            Welcome to Cozy Corner
+          </h1>
+          <p className="hero-subtitle">Where every cup tells a story</p>
+        </div>
+      </section>
 
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.z = 5;
-
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        container.appendChild(renderer.domElement);
-
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-        scene.add(ambientLight);
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
-        directionalLight.position.set(5, 10, 7.5);
-        scene.add(directionalLight);
-
-        const group = new THREE.Group();
-        const material = new THREE.MeshStandardMaterial({ color: 0xf5f5dc, roughness: 0.4, metalness: 0.1 });
-        
-        const cupGeometry = new THREE.CylinderGeometry(1.4, 1.1, 1.8, 48);
-        const cup = new THREE.Mesh(cupGeometry, material);
-        cup.position.y = 0.5;
-        group.add(cup);
-        
-        const handleGeometry = new THREE.TorusGeometry(0.6, 0.18, 16, 32, Math.PI * 1.5);
-        const handle = new THREE.Mesh(handleGeometry, material);
-        handle.position.x = 1.3;
-        handle.position.y = 0.7;
-        handle.rotation.y = Math.PI / 2;
-        group.add(handle);
-        
-        const saucerGeometry = new THREE.CylinderGeometry(2.2, 2, 0.3, 48);
-        const saucer = new THREE.Mesh(saucerGeometry, material);
-        saucer.position.y = -0.55;
-        group.add(saucer);
-
-        scene.add(group);
-        group.rotation.x = 0.2;
-
-        const particleTexture = new THREE.TextureLoader().load('https://i.imgur.com/b42WHbJ.png');
-        const particleMaterial = new THREE.PointsMaterial({
-            color: 0xffffff, size: 0.3, map: particleTexture,
-            blending: THREE.AdditiveBlending, transparent: true, opacity: 0.4, depthWrite: false,
-        });
-
-        const particleCount = 50;
-        const positions = new Float32Array(particleCount * 3);
-        for (let i = 0; i < particleCount; i++) {
-            positions[i * 3] = (Math.random() - 0.5) * 1.5;
-            positions[i * 3 + 1] = Math.random() * 2;
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 1.5;
-        }
-        const particleGeometry = new THREE.BufferGeometry();
-        particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const steam = new THREE.Points(particleGeometry, particleMaterial);
-        steam.position.y = 1.5;
-        scene.add(steam);
-
-        let mouseX = 0;
-        const mouseMoveHandler = (event) => { mouseX = (event.clientX / window.innerWidth) * 2 - 1; };
-        document.addEventListener('mousemove', mouseMoveHandler);
-
-        const animate = () => {
-            requestAnimationFrame(animate);
-            group.rotation.y += (mouseX * 0.3 - group.rotation.y) * 0.05;
-            steam.geometry.attributes.position.array.forEach((_, i) => {
-                if (i % 3 === 1) {
-                    steam.geometry.attributes.position.array[i] += 0.01;
-                    if (steam.geometry.attributes.position.array[i] > 3) {
-                        steam.geometry.attributes.position.array[i] = Math.random() * 0.5;
-                    }
-                }
-            });
-            steam.geometry.attributes.position.needsUpdate = true;
-            renderer.render(scene, camera);
-        };
-        animate();
-
-        const resizeHandler = () => {
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        };
-        window.addEventListener('resize', resizeHandler);
-
-        return () => {
-            window.removeEventListener('resize', resizeHandler);
-            document.removeEventListener('mousemove', mouseMoveHandler);
-            container.removeChild(renderer.domElement);
-        };
-    }, []);
-
-    // --- EFFECT FOR SCROLL ANIMATIONS ---
-    useEffect(() => {
-        const scrollText = scrollTextRef.current;
-        const bestseller = bestsellerRef.current;
-
-        const scrollHandler = () => {
-            if (scrollText) {
-                const MAX_FONT_SIZE = window.innerWidth > 768 ? 10 : 12;
-                const MIN_FONT_SIZE = window.innerWidth > 768 ? 6 : 8;
-                const SCROLL_RANGE = 400;
-                let scale = Math.min(window.scrollY / SCROLL_RANGE, 1);
-                let fontSize = MIN_FONT_SIZE + (MAX_FONT_SIZE - MIN_FONT_SIZE) * scale;
-                scrollText.style.fontSize = `${fontSize}vw`;
-            }
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        if (bestseller) {
-            observer.observe(bestseller);
-        }
-
-        window.addEventListener('scroll', scrollHandler, { passive: true });
-
-        return () => {
-            window.removeEventListener('scroll', scrollHandler);
-            if (bestseller) {
-                observer.unobserve(bestseller);
-            }
-        };
-    }, []);
-
-
-    return (
-        <main>
-            {/* Hero Section */}
-            <section className="hero-section">
-                <div ref={canvasContainerRef} id="canvas-container" aria-hidden="true"></div>
-                <h1 ref={scrollTextRef} className="hero-title">Welcome Home</h1>
-            </section>
-
-            {/* Bestseller Section */}
-            <section ref={bestsellerRef} className="content-section bestseller">
-                <div className="text-content">
-                    <h2>Taste the Comfort</h2>
-                    <p>Discover our signature sandwich, crafted with the freshest ingredients and a touch of homemade love. It's not just a meal; it's an experience that feels like a warm hug.</p>
+      {/* Best Sellers Section */}
+      <section className="best-sellers-home" ref={bestSellersRef}>
+        <div className="container">
+          <h2 className="section-title">Our Best Sellers</h2>
+          <div className="best-sellers-list">
+            {bestSellers.map((item, index) => (
+              <div
+                key={item.id}
+                className={`best-seller-item ${animatedItems.has(index) ? "animate-in" : ""}`}
+                data-index={index}
+              >
+                <div className="item-image-container">
+                  <img src={item.image} alt={item.name} className="item-image" />
+                  <div className="ripple-effect"></div>
                 </div>
-                <div className="image-content">
-                    <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c766?q=80&w=800" alt="A delicious-looking sandwich on a wooden board." />
+                <div className="item-details">
+                  <h3 className="item-name">{item.name}</h3>
+                  <p className="item-description">{item.description}</p>
+                  <span className="item-price">{item.price}</span>
                 </div>
-            </section>
+              </div>
+            ))}
+          </div>
+          <button className="explore-button" onClick={() => navigateTo("menu")}>
+            <span>Explore More Items</span>
+            <div className="button-ripple"></div>
+          </button>
+        </div>
+      </section>
 
-            {/* Image Gallery Section */}
-            <section className="content-section">
-                <h2>Experience the Ambiance</h2>
-                <div className="image-gallery">
-                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=800" alt="Cozy cafe interior with warm lighting." />
-                    <img src="https://images.unsplash.com/photo-1511920183353-3c9c93dae217?q=80&w=800" alt="Close up of a latte with beautiful art on top." />
-                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800" alt="A person holding a coffee cup in a relaxing cafe setting." />
-                    <img src="https://images.unsplash.com/photo-1552526881-72f222ed9de8?q=80&w=800" alt="An aesthetic corner of the cafe with plants and books." />
+      {/* Memories Section */}
+      <section className="memories-section">
+        <div className="container">
+          <h2 className="section-title">Some Memories</h2>
+          <div className="marquee-container">
+            <div className="marquee-track">
+              {[...memoryImages, ...memoryImages].map((image, index) => (
+                <div key={index} className="marquee-item">
+                  <img src={image} alt={`Memory ${index + 1}`} />
                 </div>
-            </section>
-
-            {/* Call-to-Action Section */}
-            <section className="content-section cta-section">
-                <h2>Find Your Corner</h2>
-                <p>A perfect spot is waiting for you. Let us make your day a little cozier.</p>
-                <RippleButton className="cta-button">
-                    Reserve a Table
-                </RippleButton>
-            </section>
-        </main>
-    );
-};
-
-export default Home;
+              ))}
+            </div>
+          </div>
+          <button className="explore-button" onClick={() => navigateTo("gallery")}>
+            <span>Explore More</span>
+            <div className="button-ripple"></div>
+          </button>
+        </div>
+      </section>
+    </div>
+  )
+}
